@@ -1,0 +1,29 @@
+name:                hpaip
+version:             0.1.0.0
+synopsis:            Haskell implementation of some AI algorithms from
+                     P. Norvig's book "Paradigms of Artificial
+                     Intelligence programming, Case Studies in Common
+                     Lisp".
+-- description:
+homepage:            https://github.com/kongra/hpaip
+license:             BSD3
+license-file:        LICENSE
+author:              Konrad Grzanek
+maintainer:          kongra@gmail.com
+copyright:           (c) Konrad Grzanek 2014
+category:            AI, Trees, Search
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+library
+  ghc-options:         -O2 -W -Wall -Werror -funbox-strict-fields
+  if impl(ghc >= 6.8)
+    ghc-options: -fwarn-tabs
+
+  exposed-modules:     AI.Search.Tree
+  -- other-modules:
+  -- other-extensions:
+  build-depends:       base >=4.7 && <4.8
+  -- hs-source-dirs:
+  default-language:    Haskell2010
