@@ -16,3 +16,29 @@
 -- (Rose) tree search algorithms
 ------------------------------------------------------------------------
 module AI.Search.Tree where
+
+type Adjs     a = a -> [a]
+type Goal     a = a -> Bool
+type Strategy a = [a]  -- ^ states
+               -> [a]  -- ^ children
+               -> [a]  -- ^ updated states
+
+treeSearch :: [a] -> Strategy a -> Adjs a -> Goal a -> Maybe a
+treeSearch [] _ _ _ = Nothing
+treeSearch (x:xs) strategy adjs goal
+  | goal x    = Just x
+  | otherwise = treeSearch (strategy xs (adjs x)) strategy adjs goal
+
+breadthFirstStrategy :: Strategy a
+breadthFirstStrategy = (++)
+
+depthFirstStrategy :: Strategy a
+depthFirstStrategy  = flip (++)
+
+main :: IO ()
+main = do
+  print "aaaa"
+  print "bbb"
+  print "ccc"
+
+main = print "aaa" >>= (\_ -> print "bbb") >>= (\_ -> print "ccc")
