@@ -63,7 +63,7 @@ breadthFirstTreeLevels state adjs =
 
 breadthFirstTreeList :: a -> Adjs a -> [a]
 breadthFirstTreeList state adjs =
-  concat $ breadthFirstTreeLevels state adjs
+  concat (breadthFirstTreeLevels state adjs)
 {-# INLINE breadthFirstTreeList #-}
 
 -- | A generic, strategy-agnostic tree search algorithm.
@@ -79,3 +79,20 @@ breadthFirstStrategy = (++)
 
 depthFirstStrategy :: Strategy a
 depthFirstStrategy  = flip (++)
+
+-- EX 1
+
+-- tree1Adjs :: Adjs String
+-- tree1Adjs "a" = ["b", "c"]
+-- tree1Adjs "b" = ["d", "e"]
+-- tree1Adjs "c" = ["f", "g"]
+-- tree1Adjs "e" = ["h", "i"]
+-- tree1Adjs "f" = ["j", "k", "l"]
+-- tree1Adjs "g" = ["m", "n"]
+-- tree1Adjs _   = []
+
+-- goal1 :: String -> Goal String
+-- goal1 s1 s2 = s1 == s2
+
+-- excercise1 :: Maybe String
+-- excercise1 = treeSearch ["a"] depthFirstStrategy tree1Adjs (goal1 "goat")
