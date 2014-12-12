@@ -52,19 +52,17 @@ breadthFirstSearch state adjs goal
   | otherwise    = Just (head results)
   where
     results = filter goal $ breadthFirstTreeList state adjs
-{-# INLINABLE breadthFirstSearch #-}
+{-# INLINE breadthFirstSearch #-}
 
 -- | Returns a list of levels in a tree traversed using breadth-first
 -- strategy.
 breadthFirstTreeLevels :: a -> Adjs a -> [[a]]
 breadthFirstTreeLevels state adjs =
   takeWhile (not . null) (iterate (concatMap adjs) [state])
-{-# INLINE breadthFirstTreeLevels #-}
 
 breadthFirstTreeList :: a -> Adjs a -> [a]
 breadthFirstTreeList state adjs =
   concat (breadthFirstTreeLevels state adjs)
-{-# INLINE breadthFirstTreeList #-}
 
 -- | A generic, strategy-agnostic tree search algorithm.
 treeSearch :: [a] -> Strategy a -> Adjs a -> Goal a -> Maybe a
@@ -72,7 +70,6 @@ treeSearch [] _ _ _ = Nothing
 treeSearch (x:xs) strategy adjs goal
   | goal x    = Just x
   | otherwise = treeSearch (strategy xs (adjs x)) strategy adjs goal
-{-# NOINLINE treeSearch #-}
 
 breadthFirstStrategy :: Strategy a
 breadthFirstStrategy = (++)
